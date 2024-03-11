@@ -1,5 +1,5 @@
 # EST_FS24
-## Tasks
+## Assignment 01
 ### palindrome
 ### atoi
 ### combination_um
