@@ -11,6 +11,7 @@ Paul
 ### median_of_arrays
 Gianni
 ### generate_parentheses
+Max
 ### needle_in_hay
 Max
 ### maximum_subarray
