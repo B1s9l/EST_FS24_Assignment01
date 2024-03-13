@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="de"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GenerateParentheses.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">generate-parentheses</a> &gt; <a href="index.source.html" class="el_package">zest</a> &gt; <span class="el_source">GenerateParentheses.java</span></div><h1>GenerateParentheses.java</h1><pre class="source lang-java linenums">package zest;
+
+import java.util.ArrayList;
+import java.util.List;
+
+<span class="fc" id="L6">public class GenerateParentheses {</span>
+
+    public static List&lt;String&gt; generateParentheses(int n) {
+<span class="fc" id="L9">        List&lt;String&gt; combinations = new ArrayList();</span>
+<span class="fc bfc" id="L10" title="All 4 branches covered.">        if (n&lt;=0 || n &gt; 8) return combinations;</span>
+<span class="fc" id="L11">        generateAll(new char[2 * n], 0, combinations);</span>
+<span class="fc" id="L12">        return combinations;</span>
+    }
+
+    private static void generateAll(char[] current, int pos, List&lt;String&gt; result) {
+<span class="fc bfc" id="L16" title="All 2 branches covered.">        if (pos == current.length) {</span>
+<span class="fc bfc" id="L17" title="All 2 branches covered.">            if (valid(current)) result.add(new String(current));</span>
+        } else {
+<span class="fc" id="L19">            current[pos] = '(';</span>
+<span class="fc" id="L20">            generateAll(current, pos + 1, result);</span>
+<span class="fc" id="L21">            current[pos] = ')';</span>
+<span class="fc" id="L22">            generateAll(current, pos + 1, result);</span>
+        }
+<span class="fc" id="L24">    }</span>
+
+    private static boolean valid(char[] current) {
+<span class="fc" id="L27">        int balance = 0;</span>
+<span class="fc bfc" id="L28" title="All 2 branches covered.">        for (char c : current) {</span>
+<span class="fc bfc" id="L29" title="All 2 branches covered.">            if (c == '(') balance++;</span>
+<span class="fc" id="L30">            else balance--;</span>
+<span class="fc bfc" id="L31" title="All 2 branches covered.">            if (balance &lt; 0) return false;</span>
+        }
+<span class="fc bfc" id="L33" title="All 2 branches covered.">        return (balance == 0);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

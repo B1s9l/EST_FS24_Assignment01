@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/atoi/pom.xml" />
+        <option value="$PROJECT_DIR$/frac2dec/pom.xml" />
+        <option value="$PROJECT_DIR$/palindrome/pom.xml" />
+        <option value="$PROJECT_DIR$/needle_in_hay/pom.xml" />
+        <option value="$PROJECT_DIR$/combination_sum/pom.xml" />
+        <option value="$PROJECT_DIR$/maximum_subarray/pom.xml" />
+        <option value="$PROJECT_DIR$/median_of_arrays/pom.xml" />
+        <option value="$PROJECT_DIR$/generate_parentheses/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="openjdk-21" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>
