@@ -22,7 +22,7 @@ class MyAtoi {
 
         // Process digits
         while (i < s.length() && Character.isDigit(s.charAt(i))) {
-            int digit = s.charAt(i++) - '0';
+            int digit = s.charAt(i++) - '0'; // s.charAt(i++) = char value of next digit, minus '0' yields int value of digit
 
             // Check for overflow
             if (num > (Integer.MAX_VALUE - digit) / 10) {
