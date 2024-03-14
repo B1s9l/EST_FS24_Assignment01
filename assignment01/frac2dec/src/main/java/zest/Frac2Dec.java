@@ -5,6 +5,9 @@ import java.util.HashMap;
 class Frac2Dec {
 
     public static String fractionToDecimal(int numerator, int denominator) {
+        // Add if to check division by 0
+        if (denominator == 0) return null;
+
         if (numerator == 0) return "0";
 
         StringBuilder res = new StringBuilder();
