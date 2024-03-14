@@ -4,6 +4,21 @@
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
+<<<<<<< HEAD
+        <option value="$PROJECT_DIR$/assignment01/atoi/pom.xml" />
+        <option value="$PROJECT_DIR$/assignment01/frac2dec/pom.xml" />
+        <option value="$PROJECT_DIR$/assignment01/palindrome/pom.xml" />
+        <option value="$PROJECT_DIR$/assignment01/needle_in_hay/pom.xml" />
+        <option value="$PROJECT_DIR$/assignment01/combination_sum/pom.xml" />
+        <option value="$PROJECT_DIR$/assignment01/maximum_subarray/pom.xml" />
+        <option value="$PROJECT_DIR$/assignment01/median_of_arrays/pom.xml" />
+        <option value="$PROJECT_DIR$/assignment01/generate_parentheses/pom.xml" />
+      </list>
+    </option>
+    <option name="workspaceImportForciblyTurnedOn" value="true" />
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="corretto-11" project-jdk-type="JavaSDK">
+=======
         <option value="$PROJECT_DIR$/atoi/pom.xml" />
         <option value="$PROJECT_DIR$/frac2dec/pom.xml" />
         <option value="$PROJECT_DIR$/palindrome/pom.xml" />
@@ -16,6 +31,7 @@
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="openjdk-21" project-jdk-type="JavaSDK">
+>>>>>>> refs/remotes/origin/main
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>
