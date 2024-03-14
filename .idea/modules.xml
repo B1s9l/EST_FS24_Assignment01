@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/.idea/EST_FS24.iml" filepath="$PROJECT_DIR$/.idea/EST_FS24.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/.idea/assignment01_V2.iml" filepath="$PROJECT_DIR$/.idea/assignment01_V2.iml" />
+>>>>>>> refs/remotes/origin/main
     </modules>
   </component>
 </project>
