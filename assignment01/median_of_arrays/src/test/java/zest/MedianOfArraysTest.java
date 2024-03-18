@@ -1,7 +1,0 @@
-package zest;
-
-
-class MedianOfArraysTest {
-
-
-}

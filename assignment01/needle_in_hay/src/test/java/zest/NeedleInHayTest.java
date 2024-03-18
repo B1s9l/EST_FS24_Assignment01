@@ -1,5 +1,0 @@
-package zest;
-
-
-class NeedleInHayTest {
-}
