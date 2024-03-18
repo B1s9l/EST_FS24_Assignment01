@@ -87,7 +87,7 @@ This test ressolves the survival of a conditional boundary mutant on line 28. Ma
 ### Bugs and summary
 No bugs found with the 8 specification tests. To raise the code coverage closer to 100%, assert_if_str_length_0_reached() is added. assert_plus_sign and assert_input_out_of_lower_bound are added to increase branch coverage, which is at 100% after incorporating them. During mutation testing, assert_conditional_boundary_overflow is inserted to kill a conditional boundary mutant on line 28. The mutation coverage is 100%.
 
-## combination_sum
+## combination_sum (basil)
 
 ## frac2dec (paul)
 ### assert_one_over_two()
