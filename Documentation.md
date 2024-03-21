@@ -190,13 +190,13 @@ It could be, that the developer only considered n = 0, because negative numbers 
 So I want to check if negative numbers return an empty array as well and add T5.
 I am happy with the test suite and continue with structural testing.
 
-**Structural Testing**
+### Structural Testing
 
 Luckily, I already have 100% coverage. So I move on to mutation testing.
 
 
 
-**Mutation Testing**
+## Mutation Testing
 The mutation coverage is 91%. Two mutants survived, namely:
 - On line 5: replaced return value with Collections.emptyList for zest/GenerateParentheses::generateParentheses
 - On line 5: changed conditional boundary
@@ -287,12 +287,12 @@ In General, I followed the principle of not changing my inputs a lot, but only c
 As I, from my point of view, tested the requirements thoroughly by combining the different partitions as well as adding additional cases where I think the program could break, we now move to structural testing in order to examine the code more in detail and to find more tests that we missed to add to our test suite.
 
 
-**Structural Testing**
+## Structural Testing
 
 We already have 100% branch and condition coverage, so I did a good job in requirement based testing and move on to mutation testing.
 
 
-**Mutation Testing**
+## Mutation Testing
 
 Mutation Coverage is 100%. All Mutants were killed (Check picture).
 ![Bildschirmfoto 2024-03-13 um 12.49.38.png](..%2F..%2F..%2F..%2F..%2FBildschirmfoto%202024-03-13%20um%2012.49.38.png)
