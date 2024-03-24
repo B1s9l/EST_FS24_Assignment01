@@ -46,6 +46,9 @@
 
 
 ## atoi (paul)
+
+### Specification-based testing
+
 ### convert_string_to_int()
 This test checks if a string containing just numbers is converted correctly.
 
@@ -74,7 +77,9 @@ This tests checks if the program reads until the first non-digit input character
 This tests checks if the condition of a valid string with no integer returns 0
 This test is added in structural testing phase. With this test, the code coverage is at 98%.
 
-<<<<<<< HEAD
+
+### Structural and mutation testing
+
 ### assert_plus_sign()
 This test checks if the '+' sign is read correctly when passed in as input. This test is added in structural testing phase.
 
@@ -90,6 +95,9 @@ No bugs found with the 8 specification tests. To raise the code coverage closer 
 ## combination_sum (basil)
 
 ## frac2dec (paul)
+
+### Specification-based testing
+
 ### assert_one_over_two()
 This test checks if a fraction is correctly converted to decimal fraction representation in string format.
 
@@ -107,6 +115,9 @@ This test checks if repeating digits are handled correctly if don't appear immed
 
 ### assert_minus_one_over_two()
 This test makes sure that the negative signs are handled correctly such that a high condition + branch coverage is achieved.
+
+
+### Structure and mutation testing
 
 ### assert_one_over_minus_two()
 This test makes sure that the negative signs are handled correctly such that a high condition + branch coverage is achieved.
