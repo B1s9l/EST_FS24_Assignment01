@@ -281,15 +281,15 @@ While perfoming mutation testing, line 11 and line 15 show some surviving condit
 - test: input not sorted second array
 - test: input not mixed odd
 - test: input not mixed even
+- test: input two elements equal(bug)
 
 6. Automate Test cases
 - see MedianOfArraysTest.java
 7. Conclusion:
    When I test with empty input for both arrays, the program return -1, this can be avoided by instead of  returning -1 in the getMin function you would just return 0.
-Besides that I did not find any other bugs. I achieved 100% branch coverage right away so then I went to mutation testing. The mutation coverage was 93%. Two mutants were boundary mutators, the third was a mathmutator.
-One mutant changed the > and the < in the is sorted, which does not make sense to test.
-The second mutant changed also the smaller than to a greater than in the getMin function and then returned the wrong result aswell, not worth testing either.
-The third mutant changed the addition of the length of the arrays to a substraction, which does not have to be tested either.
+Besides that I did not find any other bugs. Another bug was in the isAscendingSorted, since it should only check whether the number is smaller and not smaller equal. I achieved 100% branch coverage right away so then I went to mutation testing. The mutation coverage was 96%. One mutant was a boundary mutator, the other was a mathmutator.
+The first mutant changed the smaller than to a greater than in the getMin function and then returned the wrong result aswell, I then exposed the getMin method of the class and wrote an additional test for it, in case anyone mixes up a minimum, better be safe than sorry.
+The second mutant changed the addition of the length of the arrays to a substraction, which does not have to be tested, because it does not affect the result in where it will be evaluated.
 The boundary mutators I do not have
 
 ## generate_parentheses (max)

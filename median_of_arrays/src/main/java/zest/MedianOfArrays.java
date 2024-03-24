@@ -3,7 +3,7 @@ package zest;
 class MedianOfArrays {
     private int p1 = 0, p2 = 0;
 
-    private int getMin(int[] nums1, int[] nums2) {
+    protected int getMin(int[] nums1, int[] nums2) {
         if (p1 < nums1.length && p2 < nums2.length) {
             return nums1[p1] < nums2[p2] ? nums1[p1++] : nums2[p2++];
         } else if (p1 < nums1.length) {
@@ -16,11 +16,10 @@ class MedianOfArrays {
 
     public boolean isArraySortedAscending(int[] array) {
         for (int i = 0; i < array.length - 1; i++) {
-            if (array[i] >= array[i + 1]) {
+            if (array[i] > array[i + 1]) {
                 return false;
             }
         }
-
         return true;
     }
 
