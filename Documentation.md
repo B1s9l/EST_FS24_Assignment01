@@ -134,6 +134,49 @@ While perfoming mutation testing, line 11 and line 15 show some surviving condit
 
 ## median_of_arrays (gianni)
 
+1. Understand the requirements
+- The program should find the median of two sorted arrays(ascending order), if one  array is empty, null or not sorted, should return 0.
+2. Explore what the program does for various inputs:
+- 0 (two empty arrays): -1 (found my first bug)
+- null (null): 0
+- array not sorted : 0
+- OddLengthArrays(1,2, 3): 2
+- NegativesOddLength(-3,-2,-1): -2
+- EvenLength Arrays(1,2,3,4): 2.5
+3. Explore possible inputs and outputs and identify partitions
+- Empty Arrays: return wrong result
+- Null Arrays: 0
+- OddLength:return mid element
+- EvenLength: return average of middle elements
+- MixedSorted: sort correctly and return correct
+- Not sorted: return 0
+- Very large ints: considered by developer, could possibly be changed to long but i think was not intended by dev
+4. Analyse the boundaries
+- boundary empty array, null or not sorted array and not empty array: first case just return 0 else find middle element
+
+5. Devise test cases
+- test: input null first param
+- test: input null second param
+- test: input empty first param
+- test: input empty second param
+- test: input empty both params(bug)
+- test: input mixed array even length
+- test: input mixed array odd length
+- test: input not sorted first array
+- test: input not sorted second array
+- test: input not mixed odd
+- test: input not mixed even
+
+6. Automate Test cases
+- see MedianOfArraysTest.java
+7. Conclusion:
+   When I test with empty input for both arrays, the program return -1, this can be avoided by instead of  returning -1 in the getMin function you would just return 0.
+Besides that I did not find any other bugs. I achieved 100% branch coverage right away so then I went to mutation testing. The mutation coverage was 93%. Two mutants were boundary mutators, the third was a mathmutator.
+One mutant changed the > and the < in the is sorted, which does not make sense to test.
+The second mutant changed also the smaller than to a greater than in the getMin function and then returned the wrong result aswell, not worth testing either.
+The third mutant changed the addition of the length of the arrays to a substraction, which does not have to be tested either.
+The boundary mutators I do not have
+
 ## generate_parentheses (max)
 ### Specification-based Testing
 **1. Understanding Requirements, Input and Output**
@@ -309,3 +352,39 @@ Mutation Coverage is 100%. All Mutants were killed (Check picture).
 ![Bildschirmfoto 2024-03-13 um 12.49.38.png](..%2F..%2F..%2F..%2F..%2FBildschirmfoto%202024-03-13%20um%2012.49.38.png)
 
 ## maximum_subarray (gianni)
+1. Understand the requirements
+- The program should find the maximum Sum in an array, if the array is empty, should return 0.
+2. Explore what the program does for various inputs:
+- 0 (empty array): Crash (found my first bug)
+- null (null): Crash (found bug nr2)
+- Single digit (1): 1
+- OnlyPositive(1,2,3): 6
+- OnlyNegatives(-3,-2,-1): -1
+- MixedArray (-3, 2, -1, 2): 4
+3. Explore possible inputs and outputs and identify partitions
+- Empty Array: Crash
+- Null Array: Crash
+- OnlyPositives: sum all
+- Only Negatives: return largest
+- MixedArray with large positive order: return sum of that order
+- Mixed array with small negatives and big following positives: return sum over several negatives
+- Very large ints: considered by developer, could possibly be changed to long but i think was not intended by dev
+4. Analyse the boundaries
+- boundary empty array and not empty array: empty just return 0 else sum array
+
+5. Devise test cases
+- test: input only negatives 
+- test: input empty array
+- test: input null
+- test: input only positives 
+- test: input mixed with large positive
+- test: input mixed with overlapping sums
+
+6. Automate test cases according to devised ones
+- see MaximumSubarraySumTest.java
+
+7. Conclusion:
+When I test with empty input or null, the program crashes, this can be avoided by adding an if
+and checking whether the array is null or empty, else I think its a quite elegant solutions because it solves the problem in
+linear time. The other test cases all passed. Since the code does not contain any branches but only a loop, I achieved 100%
+branch coverage right away with my test cases so I could skip this part. Mutation test coverage was 100% so no additional test case needed. 
