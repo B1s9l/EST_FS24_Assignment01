@@ -365,7 +365,7 @@ Luckily, I already have 100% coverage. So I move on to mutation testing.
 
 
 
-## Mutation Testing
+### Mutation Testing
 The mutation coverage is 91%. Two mutants survived, namely:
 - On line 5: replaced return value with Collections.emptyList for zest/GenerateParentheses::generateParentheses
 - On line 5: changed conditional boundary
