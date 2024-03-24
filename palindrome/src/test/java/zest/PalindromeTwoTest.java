@@ -1,48 +1,72 @@
 package zest;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-/*
+
 public class PalindromeTwoTest {
 
     @Test
-    public void testPalindromeWithPositiveNumber() {
-        assertTrue(PalindromeTwo.isPalindrome(121));
+    public void testPalindromeZero() {
+        Assertions.assertTrue(PalindromeTwo.isPalindrome(0));
+    }
+    @Test
+    public void testPalindromeLeadingZero() {
+        Assertions.assertTrue(PalindromeOne.isPalindrome(011));
+    }
+    @Test
+    public void testPalindromeLeadingZeroNot() {
+        Assertions.assertFalse(PalindromeOne.isPalindrome(0110));
+    }
+    @Test
+    public void testPalindromeSingleDigit() {
+        Assertions.assertTrue(PalindromeTwo.isPalindrome(1));
+    }
+    @Test
+    public void testPalindromeTwoDigits() {
+        Assertions.assertTrue(PalindromeTwo.isPalindrome(11));
+    }
+    @Test
+    public void testPalindromeTwoDigitsNot() {
+        Assertions.assertFalse(PalindromeTwo.isPalindrome(10));
     }
 
     @Test
-    public void testPalindromeWithNegativeNumber() {
-        assertFalse(PalindromeTwo.isPalindrome(-121));
+    public void testPalindromeThreeodd() {
+        Assertions.assertTrue(PalindromeTwo.isPalindrome(202));
     }
 
     @Test
-    public void testPalindromeWithSingleDigit() {
-        assertTrue(PalindromeTwo.isPalindrome(0));
+    public void testPalindromeMultiEven() {
+        Assertions.assertTrue(PalindromeTwo.isPalindrome(123321));
     }
-
     @Test
-    public void testNonPalindrome() {
-        assertFalse(PalindromeTwo.isPalindrome(123));
+    public void testPalindromeMultiOdd() { Assertions.assertTrue(PalindromeTwo.isPalindrome(12321)); }
+    @Test
+    public void testPalindromeMultiFirstNot() {
+        Assertions.assertFalse(PalindromeTwo.isPalindrome(12331));
     }
-
     @Test
-    public void testPalindromeWithLeadingZero() {
-        assertFalse(PalindromeTwo.isPalindrome(01210)); // 01210 is interpreted as decimal 1010
+    public void testPalindromeMultiNotFirstNot() {
+        Assertions.assertFalse(PalindromeTwo.isPalindrome(12332));
     }
-
     @Test
-    public void testPalindromeWithEvenLengthNumber() {
-        assertTrue(PalindromeTwo.isPalindrome(1221));
+    public void testPalindromeUpperConstNoIn() {
+        Assertions.assertFalse(PalindromeTwo.isPalindrome(1048575));
     }
-
     @Test
-    public void testPalindromeWithOddLengthNumber() {
-        assertTrue(PalindromeTwo.isPalindrome(12321));
+    public void testPalindromeUpperConstYesIn() {
+        Assertions.assertTrue(PalindromeTwo.isPalindrome(1048401));
     }
-
     @Test
-    public void testPalindromeWithLargeNumber() {
-        assertTrue(PalindromeTwo.isPalindrome(21474747412));
+    public void testPalindromeUpperConstNoOut() {
+        Assertions.assertFalse(PalindromeTwo.isPalindrome(1048576));
+    }
+    @Test
+    public void testPalindromeLowerConstNo() {
+        Assertions.assertFalse(PalindromeTwo.isPalindrome(-1048576));
+    }
+    @Test
+    public void testPalindromeNegative() {
+        Assertions.assertFalse(PalindromeTwo.isPalindrome(-121));
     }
 }
-*/
