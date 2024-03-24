@@ -130,48 +130,109 @@ In line 14:
 
 ### Specification-based testing
 
+1. Understand the requirements
+
+- The program takes a string input and converts it to a number. Non-digit characters should be ignored.
+
+2. Explore what the program does for various inputs
+
+- For string of digits only or minus sign and digits, return the number in the string
+- String with trailing whitespace and digits, the program returns just the number
+- Very long strings of digits should return the maximal/ minimal integer in Java
+- Irrelevant characters are ignored, string with no digit returns 0
+
+3. Identify partitions
+
+a) Input
+
+- string of digits
+- string of negative number
+- string with no digit
+- string with whitespaces
+- string with digits and irrelevant characters
+- empty string
+
+b) Output
+
+- positive integer
+- negative integer
+- zero
+
+4. Boundaries
+
+- empty string
+- zero
+- "0"
+- " -1"
+- "2147483647"
+- "-2147483648"
+
+5. Devise test cases
+
 ### convert_string_to_int()
+
 This test checks if a string containing just numbers is converted correctly.
 
 ### remove_whitespace_keep_negative()
+
 This test checks if trailing whitespaces get trimmed off from input and if a negative sign is handled correctly.
 
 ### cut_off_trailing_alphabet()
+
 If the input contains a string of digits followed by words, symbols or alphabets, this test passes if the digits are extracted correctly.
 
 ### assert_abc_equals_zero()
+
 If no digit is in the input string, this test passes when 0 is returned.
 
 ### input_null()
+
 This test passes if null input returns 0.
 
+6. Automate tests
+
+- Run with JUnit, all tests pass
+
+7. Augment test suite
+
 ### assert_0032_equals_32()
+
 This test passes if leading 0 doesn't change value of number in input string.
 
 ### assert_input_out_of_range()
+
 This test checks if a out-of-range input makes the function return the border value.
 
 ### assert_rest_of_string_ignored()
+
 This tests checks if the program reads until the first non-digit input character and ignores the rest of string.
 
-### assert_if_str_length_0_reached()
-This tests checks if the condition of a valid string with no integer returns 0
-This test is added in structural testing phase. With this test, the code coverage is at 98%.
-
+- All tests pass
 
 ### Structural and mutation testing
 
+### assert_if_str_length_0_reached()
+
+This tests checks if the condition of a valid string with no integer returns 0
+This test is added in structural testing phase. With this test, the code coverage is at 98%.
+
 ### assert_plus_sign()
+
 This test checks if the '+' sign is read correctly when passed in as input. This test is added in structural testing phase.
 
 ### assert_input_out_of_lower_bound()
+
 If the input string contains a negative number out of the built-in integer bound of Java, the minimal integer value is returned. This test is added in structural testing phase.
 
 ### assert_conditional_boundary_overflow()
+
 This test ressolves the survival of a conditional boundary mutant on line 28. Makes sure that input close to Integer.MAX_VALUE doesnt return the Integer.MAX_VALUE.
 
-### Bugs and summary
-No bugs found with the 8 specification tests. To raise the code coverage closer to 100%, assert_if_str_length_0_reached() is added. assert_plus_sign and assert_input_out_of_lower_bound are added to increase branch coverage, which is at 100% after incorporating them. During mutation testing, assert_conditional_boundary_overflow is inserted to kill a conditional boundary mutant on line 28. The mutation coverage is 100%.
+### Summary
+
+No bugs found with the specification tests. To raise the code coverage closer to 100%, assert_if_str_length_0_reached() is added. assert_plus_sign and assert_input_out_of_lower_bound are added to increase branch coverage, which is at 100% after incorporating them. During mutation testing, assert_conditional_boundary_overflow is inserted to kill a conditional boundary mutant on line 28. The mutation coverage is 100%.
+
+
 
 ## combination_sum (basil)
 ### 1. Specification-based testing
@@ -264,42 +325,88 @@ When mutation testing CombinationSum One mutants survived:
   - Alternatively a sorting algorithm could be implemented in the code and tested respectively.
 
 
+
 ## frac2dec (paul)
 
 ### Specification-based testing
 
+1. Understand the requirements
+
+- The program takes two integer inputs as nominator and denominator of a fraction. It returns the decimal representation of the fraction in string format.
+
+2. Explore what the program does for various inputs
+
+- for 1, 2, the program returns 0.5
+- for 2, 1, the program returns 2
+- for inputs that result in repeating fraction, the pattern is enclosed with ()
+- negative sign is handled correctly
+
+3. Identify partition
+
+a) Input
+
+- positive integer
+- negative integer
+- zero
+
+b) Output
+
+- fraction is integer
+- fraction is a finite decimal fraction
+- fraction is an infinite decimal fraction
+
+4. Analyze boundaries
+
+- nominator = 0
+- denominator = 0
+- the result equals Java integer boundary
+
+5. Devise test cases
+
 ### assert_one_over_two()
+
 This test checks if a fraction is correctly converted to decimal fraction representation in string format.
 
 ### assert_two_over_one()
+
 This test checks if a integer fraction is handled correctly.
 
 ### assert_four_over_333()
+
 This test checks if repeating digits are enclosed with ().
 
 ### assert_zero_denominator()
-This test checks if taking 0 as denominator makes function return null. This test failed. 
+
+This test checks if taking 0 as denominator makes function return null. This test failed.
+To fix the bug caused by zero division, add an if clause at the start of the function definition to check if denominator == 0 then return null.
 
 ### assert_first_digits_then_repeat()
-This test checks if repeating digits are handled correctly if don't appear immediately after the decimal point. 
+
+This test checks if repeating digits are handled correctly if don't appear immediately after the decimal point.
 
 ### assert_minus_one_over_two()
+
 This test makes sure that the negative signs are handled correctly such that a high condition + branch coverage is achieved.
 
+6. Run with JUnit, all tests passed
 
 ### Structure and mutation testing
 
 ### assert_one_over_minus_two()
+
 This test makes sure that the negative signs are handled correctly such that a high condition + branch coverage is achieved.
 
 ### assert_minus_one_over_minus_four()
+
 This test makes sure that the negative signs are handled correctly such that a high condition + branch coverage is achieved.
 
 ### assert_nominator_zero()
+
 This test ensures that "0" is returned when 0 is passed as input to the nominator argument. This test kills a conditional boundary mutant.
 
-### Bugs and summary
-To fix the bug caused by zero division, add an if clause at the start of the function definition to check if denominator == 0 then return null. The sixth, seventh and eighth tests are added in structural testing phase. Without them, the test suite shows a low branch coverage due to res.append() (line 15) call to add a '-' sign to output string. The test suite shows 93% branch coverage, which is sufficiently good because the last missing branch happens at the nominator == 0 branch, it's purpose make edge case efficient. In the case of nominator != 0, the program should continue running. There is no other branch to test. The overall code coverage is at 98%, with the remaining 2% correspond to class name definition.
+### Summary
+
+The sixth, seventh and eighth tests are added in structural testing phase. Without them, the test suite shows a low branch coverage due to res.append() (line 15) call to add a '-' sign to output string. The test suite shows 93% branch coverage, which is sufficiently good because the last missing branch happens at the nominator == 0 branch, it's purpose make edge case efficient. In the case of nominator != 0, the program should continue running. There is no other branch to test. The overall code coverage is at 98%, with the remaining 2% correspond to class name definition.
 While perfoming mutation testing, line 11 and line 15 show some surviving conditional boundary mutants. While the mutant on line 11 is fixed by adding the last test, it is not required to write tests for line 15 because even if the code uses >= instead of >, the case of either or both input being zero is already taken care of in the first two if-statements of the program. Thus the test suite has a mutation score of 90%.
 
 ## median_of_arrays (gianni)
