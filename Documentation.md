@@ -68,7 +68,62 @@
 5)	Go back to the source code and look for other interesting tests you can devise based on the code.
 
 ### Mutation testing
-?
+#### PalindromeOneTest mutations
+When mutation testing PalindromeOne one mutant survived:
+- The conditional boundary (start < end) was changed.
+- (start) is defined as 0 
+- (end) must be at least the length of a single digit integer minus 1, so >=1 -1
+- This doesn't make sense because if the loop is incorrectly entered it will also never terminate
+- There is no need for a new test to covere this case
+
+#### PalindromeTwoTest mutations
+Arguably line 13 and 14 in the code can be omitted without changing its behavior: The code would work without those lines and KILL all mutants.
+(One mutant is shown as surviving when checking the console report: in the report html file it is NOT SHOWN)
+
+When mutation testing PalindromeOne ten mutants survived:
+In line 13:
+- Replaced integer modulus with multiplication → SURVIVED
+  - The if-conditions at the beginning are there to quickly analyze more common/ shorter numbers
+    in order to make the code more efficient. If an input wrongfully is skipped by those statements
+    it will still be checked by a different part of the code and return the correct result. 
+- Negated conditional → SURVIVED
+  - I added a test that checks if an integer x with 10 < x < 100 that is not a palindrome correctly returns false
+  - This mutation test now passes!
+- Changed conditional boundary → SURVIVED
+  - Changing the conditional boundary in line 13 would turn the (x < 100) into (x <= 100). The statement itself would result
+    in a wrong return, but since the code covers that case with a different if-statement
+    the mutation is not caught by a test and therefore survives.
+  - Writing a test for this case is irrelevant.
+In line 14:
+- Replaced integer modulus with multiplication → SURVIVED
+  - The if-conditions at the beginning are there to quickly analyze more common/ shorter numbers
+    in order to make the code more efficient. If an input wrongfully is skipped by those statements
+    it will still be checked by a different part of the code and return the correct result.
+- Negated conditional → SURVIVED
+  - I added a test that checks if an integer x with 10 < x < 100 that is not a palindrome correctly returns false
+  - This mutation test now passes!
+- Replaced integer addition with subtraction → SURVIVED
+  - This mutation is not caught because it does not alter the output.
+  - It will not return a false True and every correct True that is not caught will be caught later in the script.
+  - This is also due to the reason that this line could be omitted.
+- Replaced integer modulus with multiplication → SURVIVED
+  - This mutation is not caught because it does not alter the output.
+  - It will not return a false True and every correct True that is not caught will be caught later in the script.
+  - This is also due to the reason that this line could be omitted.
+- Replaced integer multiplication with division → SURVIVED
+  - This mutation is not caught because it does not alter the output.
+  - It will not return a false True and every correct True that is not caught will be caught later in the script.
+  - This is also due to the reason that this line could be omitted.
+- Changed conditional boundary → SURVIVED
+  - Changing the conditional boundary in line 14 would turn the (x < 1000) into (x <= 1000). The statement itself would result
+    in a wrong return, but since the code covers that case with a different if-statement
+    the mutation is not caught by a test and therefore survives.
+  - Writing a test for this case is irrelevant.
+- Replaced integer division with multiplication → SURVIVED
+  - This mutation is not caught because it does not alter the output.
+  - It will not return a false True and every correct True that is not caught will be caught later in the script.
+  - This is also due to the reason that this line could be omitted.
+
 
 
 ## atoi (paul)
