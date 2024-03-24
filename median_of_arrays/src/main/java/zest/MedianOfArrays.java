@@ -11,7 +11,7 @@ class MedianOfArrays {
         } else if (p2 < nums2.length) {
             return nums2[p2++];
         }
-        return 0;
+        return 0; // for two empty list return 0
     }
 
     public boolean isArraySortedAscending(int[] array) {
