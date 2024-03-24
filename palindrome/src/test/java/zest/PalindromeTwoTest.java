@@ -69,4 +69,13 @@ public class PalindromeTwoTest {
     public void testPalindromeNegative() {
         Assertions.assertFalse(PalindromeTwo.isPalindrome(-121));
     }
+
+    //Tests added after mutation testing
+    @Test
+    public void testPalindromeMutNegCond13() {
+        Assertions.assertFalse(PalindromeTwo.isPalindrome(98));
+    }
+
+
+
 }
