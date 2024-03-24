@@ -3,6 +3,7 @@ package zest;
 public class MaximumSubarray {
 
     public static int maxSubArray(int[] a) {
+        if(a == null || a.length == 0) return 0;
         int maxSoFar = a[0], maxEndingHere = a[0];
 
         for (int i = 1; i < a.length; ++i) {

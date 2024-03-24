@@ -1,12 +1,11 @@
 # Assignment 01 - Documentation
 ## palindrome (Basil)
 
-### Specification-based testing
+### 1. Specification-based testing
 1. Understand the requirements
 - The program should take any integer number as an input and return true if it is a palindrome or false if it is not a palindrome.
 2. Explore what the program does for various inputs:
 - 0 (0): True
-- null (null): Not an integer error
 - Single digit (1): True
 - Two digits palindrome (11): True
 - Two digits not a palindrome (12): False
@@ -34,6 +33,7 @@
 5. Devise test cases
 - test: input negative (-1)
 - test: input zero (0)
+- test: input leading zero (0)
 - test: input single digit (1)
 - test: input multiple digits (10)
 - test: input multiple digits, even (11)
@@ -41,8 +41,34 @@
 - test: input large number (21474747412)
 - test: input first/last equal (1231)
 - test: input first/last different (1223)
-6. Automate the test cases
-7. Augment the test suite with creativity and experience
+6. Automate the test cases: For PalindromeOne and PalindromeTwo: Done!
+- At this point I noticed a bug with PalindromeTwo which I will elaborate at the end of this paragraph.
+7. Augment the test suite with creativity and experience: Done!
+
+#### The bug in PalindromeTwo
+- The test for the integer 0 failed. 
+- Upon further inspection of the code I noticed the case where the input integer is 0 is caught by the wrong statement.
+- This is due to a missing case where x == 0.
+- I added line 11 in PalindromeTwo.java to fix a bug where the integer 0 would return an incorrect false.
+
+### 2. Structural Testing
+1)	Performed specification-based testing on both palindrome files.
+2)	Read the implementation and understand the main coding decisions made by the dev:
+- I added tests for the upper and lower constraints and double-checked the negative test
+3)	Run the devised test suite with a code coverage tool
+- I ran the test suites with Jacoco: Both files received:
+  - 100% Class coverage
+  - 100% Method coverage
+  - 100% Line coverage
+  - 100% branch coverage
+4)	(omitted) For each piece of code that is not covered:
+      a)	Understand why that code was not tested
+      b)	Decide whether the piece of code deserves a test (testing or not testing is now conscious decision
+      c)	If a test is needed, implement an automated test case that covers the missing pieces.
+5)	Go back to the source code and look for other interesting tests you can devise based on the code.
+
+### Mutation testing
+?
 
 
 ## atoi (paul)
@@ -93,6 +119,92 @@ This test ressolves the survival of a conditional boundary mutant on line 28. Ma
 No bugs found with the 8 specification tests. To raise the code coverage closer to 100%, assert_if_str_length_0_reached() is added. assert_plus_sign and assert_input_out_of_lower_bound are added to increase branch coverage, which is at 100% after incorporating them. During mutation testing, assert_conditional_boundary_overflow is inserted to kill a conditional boundary mutant on line 28. The mutation coverage is 100%.
 
 ## combination_sum (basil)
+### 1. Specification-based testing
+1. Understand the requirements
+- The program should take a list of integers (candidates) of arbitrary length and a single integer (target).
+- The program should then return a list containing unique lists with all combinations of integers from the first input (candidates) that added result in the integer from the second input (target).
+- The integers in the first input list (candidates) may be chosen arbitrarily many times.
+- A solution counts as unique if at least one of the values from the first input list (candidates) appears a different number of times than for another solution. 
+2. Explore what the program does for various inputs:
+- Base case yes | c: [1, 2, 3], t: 6 || c: [2, 3, 6, 7], t: 7 || c: [2, 3, 5], t: 8
+- Base case no | c: [2, 4, 6], t: 5
+- One candidate that is equal to the target | c: [1], t: 1
+- One candidate not equal to the target | c: [1], t: 2
+- Empty candidates | c: [], t: 1
+- Target is 0 | c: [1], t: 0
+- Target is negative | c: [1], t: -1
+- Candidate contains a negative | c: [-1, 1], t: 5
+- Target and candidate are negative | c: [-1], -5
+- Large input (150 combinations) | c: [1, 2, 3, 4, 5], t: 10
+- Non-distinct candidates | c: [1, 1, 2], t: 5
+3. Explore possible inputs and outputs and identify partitions
+- Single candidate, not equal to integer: None solutions
+- Single candidate, equal to integer: One solutions
+- Multiple candidates, integer: Multiple or None solutions
+- Negative candidates, positive integer: No solution
+- Positive Candidates, negative integer: No solution
+- Even candidates, odd target: No solution
+- Odd candidates, even target: Multiple or None solutions
+- Empty candidates: No solution
+- Multiple non-distinct candidates: None, One or Multiple solutions
+4. Analyse the boundaries
+- Empty candidates array
+- Single candidate
+- Multiple candidates: Smallest, Largest, All
+- Negative candidates, positive target
+- Negative candidates, negative target
+- Even candidates, odd target: Impossible
+- Odd candidates, odd target: Possible
+- Candidates containing 0
+- Non-distinct candidates
+5. Devise test cases
+- Empty candidates | c: [], t: 1 -> o: []
+- Single candidate | c: [1], t: 1 -> o: [[1]]
+- Multiple candidate | c: [2, 3, 4], t: 8 -> o: [[2, 2, 2, 2], [2, 3, 3], [2, 2, 4], [4, 4]]
+- Negative candidates, positive target | c: [-1, -2, -3], t: 5 -> o: []
+- Positive candidates, negative target | c: [1, 2, 3], t: -5 -> o: []
+- Negative candidates, negative target | c: [-2, -3, -4], t: -5 -> o: [[-2, -3]]
+- Even candidates, odd target | c: [2, 4], t: 5 -> o: []
+- Odd candidates, even target | c: [1, 3], t: 4 -> [[1, 1, 1, 1], [1, 3]]
+- Target 0 | c: [1, 2], t: 0 -> o: []
+- Candidates 0 | c: [0, 1, 2], t: 3 -> o: [[1, 1, 1], [1, 2]] 
+- Non-distinct candidates | c: [1, 1, 2], t: 3 -> o: [[1, 1, 1], [1, 2]]
+- Large numbers | c: [1000, 2000], t: 3000 -> [[1000, 1000, 1000], [1000, 2000]]
+- Smallest candidate | c: [1, 2, 3], t: 1 -> o: [[1]]
+6. Automate the test cases: Done!
+- I found a bug in the for-loop in getResult() [more below]
+- I omitted the tests for negative candidates under the assumption the inputs are always >= 0:
+  fixing the code to implement this functionality would surpass a simple bug and require rewriting the entire function
+7. Augment the test suite with creativity and experience: Done!
+
+#### Bug in combination sum
+- I found a bug in the for-loop in the getResult() method. Any 0 in the candidates would result in
+    infinite amount of solutions, since 0 can be added arbitrarily many times without changing the total sum
+    and still be considered a unique solution.
+- To avoid this I added line 19 that skips every 0.
+
+### 2. Structural Testing
+1)	Performed specification-based testing on the CombinationSum file.
+2)	Read the implementation and understand the main coding decisions made by the dev:
+3)	Run the devised test suite with a code coverage tool
+- I ran the test suites with Jacoco:
+    - 100% Class coverage
+    - 100% Method coverage
+    - 100% Line coverage
+    - 100% branch coverage
+4)	(omitted) For each piece of code that is not covered:
+      a)	Understand why that code was not tested
+      b)	Decide whether the piece of code deserves a test (testing or not testing is now conscious decision
+      c)	If a test is needed, implement an automated test case that covers the missing pieces.
+5)	Go back to the source code and look for other interesting tests you can devise based on the code.
+
+### Mutation testing
+When mutation testing CombinationSum One mutants survived:
+- Removed call to java/util/Arrays::sort → SURVIVED
+  - Sorting the candidates is crucial for obtaining all combinations
+  - Since sorting is handled by a built-in method no further tests are required.
+  - Alternatively a sorting algorithm could be implemented in the code and tested respectively.
+
 
 ## frac2dec (paul)
 
@@ -133,6 +245,49 @@ To fix the bug caused by zero division, add an if clause at the start of the fun
 While perfoming mutation testing, line 11 and line 15 show some surviving conditional boundary mutants. While the mutant on line 11 is fixed by adding the last test, it is not required to write tests for line 15 because even if the code uses >= instead of >, the case of either or both input being zero is already taken care of in the first two if-statements of the program. Thus the test suite has a mutation score of 90%.
 
 ## median_of_arrays (gianni)
+
+1. Understand the requirements
+- The program should find the median of two sorted arrays(ascending order), if one  array is empty, null or not sorted, should return 0.
+2. Explore what the program does for various inputs:
+- 0 (two empty arrays): -1 (found my first bug)
+- null (null): 0
+- array not sorted : 0
+- OddLengthArrays(1,2, 3): 2
+- NegativesOddLength(-3,-2,-1): -2
+- EvenLength Arrays(1,2,3,4): 2.5
+3. Explore possible inputs and outputs and identify partitions
+- Empty Arrays: return wrong result
+- Null Arrays: 0
+- OddLength:return mid element
+- EvenLength: return average of middle elements
+- MixedSorted: sort correctly and return correct
+- Not sorted: return 0
+- Very large ints: considered by developer, could possibly be changed to long but i think was not intended by dev
+4. Analyse the boundaries
+- boundary empty array, null or not sorted array and not empty array: first case just return 0 else find middle element
+
+5. Devise test cases
+- test: input null first param
+- test: input null second param
+- test: input empty first param
+- test: input empty second param
+- test: input empty both params(bug)
+- test: input mixed array even length
+- test: input mixed array odd length
+- test: input not sorted first array
+- test: input not sorted second array
+- test: input not mixed odd
+- test: input not mixed even
+
+6. Automate Test cases
+- see MedianOfArraysTest.java
+7. Conclusion:
+   When I test with empty input for both arrays, the program return -1, this can be avoided by instead of  returning -1 in the getMin function you would just return 0.
+Besides that I did not find any other bugs. I achieved 100% branch coverage right away so then I went to mutation testing. The mutation coverage was 93%. Two mutants were boundary mutators, the third was a mathmutator.
+One mutant changed the > and the < in the is sorted, which does not make sense to test.
+The second mutant changed also the smaller than to a greater than in the getMin function and then returned the wrong result aswell, not worth testing either.
+The third mutant changed the addition of the length of the arrays to a substraction, which does not have to be tested either.
+The boundary mutators I do not have
 
 ## generate_parentheses (max)
 ### Specification-based Testing
@@ -309,3 +464,39 @@ Mutation Coverage is 100%. All Mutants were killed (Check picture).
 ![Bildschirmfoto 2024-03-13 um 12.49.38.png](..%2F..%2F..%2F..%2F..%2FBildschirmfoto%202024-03-13%20um%2012.49.38.png)
 
 ## maximum_subarray (gianni)
+1. Understand the requirements
+- The program should find the maximum Sum in an array, if the array is empty, should return 0.
+2. Explore what the program does for various inputs:
+- 0 (empty array): Crash (found my first bug)
+- null (null): Crash (found bug nr2)
+- Single digit (1): 1
+- OnlyPositive(1,2,3): 6
+- OnlyNegatives(-3,-2,-1): -1
+- MixedArray (-3, 2, -1, 2): 4
+3. Explore possible inputs and outputs and identify partitions
+- Empty Array: Crash
+- Null Array: Crash
+- OnlyPositives: sum all
+- Only Negatives: return largest
+- MixedArray with large positive order: return sum of that order
+- Mixed array with small negatives and big following positives: return sum over several negatives
+- Very large ints: considered by developer, could possibly be changed to long but i think was not intended by dev
+4. Analyse the boundaries
+- boundary empty array and not empty array: empty just return 0 else sum array
+
+5. Devise test cases
+- test: input only negatives 
+- test: input empty array
+- test: input null
+- test: input only positives 
+- test: input mixed with large positive
+- test: input mixed with overlapping sums
+
+6. Automate test cases according to devised ones
+- see MaximumSubarraySumTest.java
+
+7. Conclusion:
+When I test with empty input or null, the program crashes, this can be avoided by adding an if
+and checking whether the array is null or empty, else I think its a quite elegant solutions because it solves the problem in
+linear time. The other test cases all passed. Since the code does not contain any branches but only a loop, I achieved 100%
+branch coverage right away with my test cases so I could skip this part. Mutation test coverage was 100% so no additional test case needed. 
