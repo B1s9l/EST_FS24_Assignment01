@@ -17,6 +17,21 @@ class MedianOfArraysTest {
         Assertions.assertEquals(3,myObject.findMedianSortedArrays(arr1,arr2));
     }
     @Test
+    public void test2Equalelements(){
+        int[] arr1 = {1,2, 2,2};
+        int[] arr2 = {3,4,5};
+        Assertions.assertEquals(2,myObject.findMedianSortedArrays(arr1,arr2));
+    }
+    @Test
+    public void testGetMin(){
+        int[] arr1 = {1,2, 2,2};
+        int[] arr2 = {3,4,5};
+        Assertions.assertEquals(1,myObject.getMin(arr1,arr2));
+        Assertions.assertEquals(2,myObject.getMin(arr1,arr2));
+        Assertions.assertEquals(2,myObject.getMin(arr1,arr2));
+        Assertions.assertEquals(2,myObject.getMin(arr1,arr2));
+    }
+    @Test
     public void testEvenLength(){
         int[] arr1 = {1,2,5};
         int[] arr2 = {3,4,5};
@@ -56,7 +71,7 @@ class MedianOfArraysTest {
     @Test
     public void testEmptySecondArray(){
         int[] arr2 = {3,4,5};
-        Assertions.assertEquals(4,myObject.findMedianSortedArrays(arr2,new int[0]));
+        Assertions.assertEquals(4,myObject.findMedianSortedArrays(arr2, new int[0]));
     }
     @Test
     public void testNotSortedFirst(){
@@ -64,6 +79,7 @@ class MedianOfArraysTest {
         int[] arr2 = {-4,-3,5, 8};
         Assertions.assertEquals(0,myObject.findMedianSortedArrays(arr1,arr2));
     }
+
     @Test
     public void testNotSortedSecond(){
         int[] arr1 = {-1,3, 7, 9};

@@ -68,7 +68,62 @@
 5)	Go back to the source code and look for other interesting tests you can devise based on the code.
 
 ### Mutation testing
-?
+#### PalindromeOneTest mutations
+When mutation testing PalindromeOne one mutant survived:
+- The conditional boundary (start < end) was changed.
+- (start) is defined as 0 
+- (end) must be at least the length of a single digit integer minus 1, so >=1 -1
+- This doesn't make sense because if the loop is incorrectly entered it will also never terminate
+- There is no need for a new test to covere this case
+
+#### PalindromeTwoTest mutations
+Arguably line 13 and 14 in the code can be omitted without changing its behavior: The code would work without those lines and KILL all mutants.
+(One mutant is shown as surviving when checking the console report: in the report html file it is NOT SHOWN)
+
+When mutation testing PalindromeOne ten mutants survived:
+In line 13:
+- Replaced integer modulus with multiplication → SURVIVED
+  - The if-conditions at the beginning are there to quickly analyze more common/ shorter numbers
+    in order to make the code more efficient. If an input wrongfully is skipped by those statements
+    it will still be checked by a different part of the code and return the correct result. 
+- Negated conditional → SURVIVED
+  - I added a test that checks if an integer x with 10 < x < 100 that is not a palindrome correctly returns false
+  - This mutation test now passes!
+- Changed conditional boundary → SURVIVED
+  - Changing the conditional boundary in line 13 would turn the (x < 100) into (x <= 100). The statement itself would result
+    in a wrong return, but since the code covers that case with a different if-statement
+    the mutation is not caught by a test and therefore survives.
+  - Writing a test for this case is irrelevant.
+In line 14:
+- Replaced integer modulus with multiplication → SURVIVED
+  - The if-conditions at the beginning are there to quickly analyze more common/ shorter numbers
+    in order to make the code more efficient. If an input wrongfully is skipped by those statements
+    it will still be checked by a different part of the code and return the correct result.
+- Negated conditional → SURVIVED
+  - I added a test that checks if an integer x with 10 < x < 100 that is not a palindrome correctly returns false
+  - This mutation test now passes!
+- Replaced integer addition with subtraction → SURVIVED
+  - This mutation is not caught because it does not alter the output.
+  - It will not return a false True and every correct True that is not caught will be caught later in the script.
+  - This is also due to the reason that this line could be omitted.
+- Replaced integer modulus with multiplication → SURVIVED
+  - This mutation is not caught because it does not alter the output.
+  - It will not return a false True and every correct True that is not caught will be caught later in the script.
+  - This is also due to the reason that this line could be omitted.
+- Replaced integer multiplication with division → SURVIVED
+  - This mutation is not caught because it does not alter the output.
+  - It will not return a false True and every correct True that is not caught will be caught later in the script.
+  - This is also due to the reason that this line could be omitted.
+- Changed conditional boundary → SURVIVED
+  - Changing the conditional boundary in line 14 would turn the (x < 1000) into (x <= 1000). The statement itself would result
+    in a wrong return, but since the code covers that case with a different if-statement
+    the mutation is not caught by a test and therefore survives.
+  - Writing a test for this case is irrelevant.
+- Replaced integer division with multiplication → SURVIVED
+  - This mutation is not caught because it does not alter the output.
+  - It will not return a false True and every correct True that is not caught will be caught later in the script.
+  - This is also due to the reason that this line could be omitted.
+
 
 
 ## atoi (paul)
@@ -147,6 +202,7 @@ No bugs found with the 8 specification tests. To raise the code coverage closer 
 - Odd candidates, even target: Multiple or None solutions
 - Empty candidates: No solution
 - Multiple non-distinct candidates: None, One or Multiple solutions
+- (omitted) Candidates is null
 4. Analyse the boundaries
 - Empty candidates array
 - Single candidate
@@ -157,6 +213,7 @@ No bugs found with the 8 specification tests. To raise the code coverage closer 
 - Odd candidates, odd target: Possible
 - Candidates containing 0
 - Non-distinct candidates
+- (omitted) Candidates is null
 5. Devise test cases
 - Empty candidates | c: [], t: 1 -> o: []
 - Single candidate | c: [1], t: 1 -> o: [[1]]
@@ -171,6 +228,7 @@ No bugs found with the 8 specification tests. To raise the code coverage closer 
 - Non-distinct candidates | c: [1, 1, 2], t: 3 -> o: [[1, 1, 1], [1, 2]]
 - Large numbers | c: [1000, 2000], t: 3000 -> [[1000, 1000, 1000], [1000, 2000]]
 - Smallest candidate | c: [1, 2, 3], t: 1 -> o: [[1]]
+- (omitted) Candidates is null | c: null, t: 1 -> o: (omitted)
 6. Automate the test cases: Done!
 - I found a bug in the for-loop in getResult() [more below]
 - I omitted the tests for negative candidates under the assumption the inputs are always >= 0:
@@ -278,15 +336,15 @@ While perfoming mutation testing, line 11 and line 15 show some surviving condit
 - test: input not sorted second array
 - test: input not mixed odd
 - test: input not mixed even
+- test: input two elements equal(bug)
 
 6. Automate Test cases
 - see MedianOfArraysTest.java
 7. Conclusion:
    When I test with empty input for both arrays, the program return -1, this can be avoided by instead of  returning -1 in the getMin function you would just return 0.
-Besides that I did not find any other bugs. I achieved 100% branch coverage right away so then I went to mutation testing. The mutation coverage was 93%. Two mutants were boundary mutators, the third was a mathmutator.
-One mutant changed the > and the < in the is sorted, which does not make sense to test.
-The second mutant changed also the smaller than to a greater than in the getMin function and then returned the wrong result aswell, not worth testing either.
-The third mutant changed the addition of the length of the arrays to a substraction, which does not have to be tested either.
+Besides that I did not find any other bugs. Another bug was in the isAscendingSorted, since it should only check whether the number is smaller and not smaller equal. I achieved 100% branch coverage right away so then I went to mutation testing. The mutation coverage was 96%. One mutant was a boundary mutator, the other was a mathmutator.
+The first mutant changed the smaller than to a greater than in the getMin function and then returned the wrong result aswell, I then exposed the getMin method of the class and wrote an additional test for it, in case anyone mixes up a minimum, better be safe than sorry.
+The second mutant changed the addition of the length of the arrays to a substraction, which does not have to be tested, because it does not affect the result in where it will be evaluated.
 The boundary mutators I do not have
 
 ## generate_parentheses (max)
@@ -362,7 +420,7 @@ Luckily, I already have 100% coverage. So I move on to mutation testing.
 
 
 
-## Mutation Testing
+### Mutation Testing
 The mutation coverage is 91%. Two mutants survived, namely:
 - On line 5: replaced return value with Collections.emptyList for zest/GenerateParentheses::generateParentheses
 - On line 5: changed conditional boundary
@@ -442,7 +500,7 @@ We combine our different partitions while only executing exceptions once in orde
 **6. Automating**
 
 I automated the devised test case from the previous step and found one bug. Specifically, with Test 2 I found a bug where the program breaks when needle is empty and haystack isn't. We can add another if statement that considers that case and returns 0 when needle is empty and haystack isn't because an empty string is at the beginning of every string. The rest of the tests passed, thus reassured me that the program behaves as it should in the devised cases.
-In General, I followed the principle of not changing my inputs a lot, but only change what is necessary such that it matches the corresponding test case. In addition, I tried to reduce the combinations of the partitions as much as possible, while still covering all the cases needed to have assurance that the program works as it should.$
+In General, I followed the principle of not changing my inputs a lot, but only change what is necessary such that it matches the corresponding test case. In addition, I tried to reduce the combinations of the partitions as much as possible, while still covering all the cases needed to have assurance that the program works as it should.
 
 
 **7. Augment Test Suite**

@@ -2,7 +2,6 @@ package zest;
 
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static zest.MaximumSubarray.maxSubArray;
 
@@ -25,7 +24,7 @@ class MaximumSubarrayTest {
     }
     @Test
     public void testMixedOnlyPositivePart(){
-        int[] arr = {-31,2,-3, -3, 4, 1, 2 , -3};
+        int[] arr = {-31, 2,-3, -3, 4, 1, 2 , -3};
         Assertions.assertEquals(7, maxSubArray(arr));
     }
     @Test
