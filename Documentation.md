@@ -119,6 +119,92 @@ This test ressolves the survival of a conditional boundary mutant on line 28. Ma
 No bugs found with the 8 specification tests. To raise the code coverage closer to 100%, assert_if_str_length_0_reached() is added. assert_plus_sign and assert_input_out_of_lower_bound are added to increase branch coverage, which is at 100% after incorporating them. During mutation testing, assert_conditional_boundary_overflow is inserted to kill a conditional boundary mutant on line 28. The mutation coverage is 100%.
 
 ## combination_sum (basil)
+### 1. Specification-based testing
+1. Understand the requirements
+- The program should take a list of integers (candidates) of arbitrary length and a single integer (target).
+- The program should then return a list containing unique lists with all combinations of integers from the first input (candidates) that added result in the integer from the second input (target).
+- The integers in the first input list (candidates) may be chosen arbitrarily many times.
+- A solution counts as unique if at least one of the values from the first input list (candidates) appears a different number of times than for another solution. 
+2. Explore what the program does for various inputs:
+- Base case yes | c: [1, 2, 3], t: 6 || c: [2, 3, 6, 7], t: 7 || c: [2, 3, 5], t: 8
+- Base case no | c: [2, 4, 6], t: 5
+- One candidate that is equal to the target | c: [1], t: 1
+- One candidate not equal to the target | c: [1], t: 2
+- Empty candidates | c: [], t: 1
+- Target is 0 | c: [1], t: 0
+- Target is negative | c: [1], t: -1
+- Candidate contains a negative | c: [-1, 1], t: 5
+- Target and candidate are negative | c: [-1], -5
+- Large input (150 combinations) | c: [1, 2, 3, 4, 5], t: 10
+- Non-distinct candidates | c: [1, 1, 2], t: 5
+3. Explore possible inputs and outputs and identify partitions
+- Single candidate, not equal to integer: None solutions
+- Single candidate, equal to integer: One solutions
+- Multiple candidates, integer: Multiple or None solutions
+- Negative candidates, positive integer: No solution
+- Positive Candidates, negative integer: No solution
+- Even candidates, odd target: No solution
+- Odd candidates, even target: Multiple or None solutions
+- Empty candidates: No solution
+- Multiple non-distinct candidates: None, One or Multiple solutions
+4. Analyse the boundaries
+- Empty candidates array
+- Single candidate
+- Multiple candidates: Smallest, Largest, All
+- Negative candidates, positive target
+- Negative candidates, negative target
+- Even candidates, odd target: Impossible
+- Odd candidates, odd target: Possible
+- Candidates containing 0
+- Non-distinct candidates
+5. Devise test cases
+- Empty candidates | c: [], t: 1 -> o: []
+- Single candidate | c: [1], t: 1 -> o: [[1]]
+- Multiple candidate | c: [2, 3, 4], t: 8 -> o: [[2, 2, 2, 2], [2, 3, 3], [2, 2, 4], [4, 4]]
+- Negative candidates, positive target | c: [-1, -2, -3], t: 5 -> o: []
+- Positive candidates, negative target | c: [1, 2, 3], t: -5 -> o: []
+- Negative candidates, negative target | c: [-2, -3, -4], t: -5 -> o: [[-2, -3]]
+- Even candidates, odd target | c: [2, 4], t: 5 -> o: []
+- Odd candidates, even target | c: [1, 3], t: 4 -> [[1, 1, 1, 1], [1, 3]]
+- Target 0 | c: [1, 2], t: 0 -> o: []
+- Candidates 0 | c: [0, 1, 2], t: 3 -> o: [[1, 1, 1], [1, 2]] 
+- Non-distinct candidates | c: [1, 1, 2], t: 3 -> o: [[1, 1, 1], [1, 2]]
+- Large numbers | c: [1000, 2000], t: 3000 -> [[1000, 1000, 1000], [1000, 2000]]
+- Smallest candidate | c: [1, 2, 3], t: 1 -> o: [[1]]
+6. Automate the test cases: Done!
+- I found a bug in the for-loop in getResult() [more below]
+- I omitted the tests for negative candidates under the assumption the inputs are always >= 0:
+  fixing the code to implement this functionality would surpass a simple bug and require rewriting the entire function
+7. Augment the test suite with creativity and experience: Done!
+
+#### Bug in combination sum
+- I found a bug in the for-loop in the getResult() method. Any 0 in the candidates would result in
+    infinite amount of solutions, since 0 can be added arbitrarily many times without changing the total sum
+    and still be considered a unique solution.
+- To avoid this I added line 19 that skips every 0.
+
+### 2. Structural Testing
+1)	Performed specification-based testing on the CombinationSum file.
+2)	Read the implementation and understand the main coding decisions made by the dev:
+3)	Run the devised test suite with a code coverage tool
+- I ran the test suites with Jacoco:
+    - 100% Class coverage
+    - 100% Method coverage
+    - 100% Line coverage
+    - 100% branch coverage
+4)	(omitted) For each piece of code that is not covered:
+      a)	Understand why that code was not tested
+      b)	Decide whether the piece of code deserves a test (testing or not testing is now conscious decision
+      c)	If a test is needed, implement an automated test case that covers the missing pieces.
+5)	Go back to the source code and look for other interesting tests you can devise based on the code.
+
+### Mutation testing
+When mutation testing CombinationSum One mutants survived:
+- Removed call to java/util/Arrays::sort → SURVIVED
+  - Sorting the candidates is crucial for obtaining all combinations
+  - Since sorting is handled by a built-in method no further tests are required.
+  - Alternatively a sorting algorithm could be implemented in the code and tested respectively.
+
 
 ## frac2dec (paul)
 
