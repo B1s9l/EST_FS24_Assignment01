@@ -147,6 +147,7 @@ No bugs found with the 8 specification tests. To raise the code coverage closer 
 - Odd candidates, even target: Multiple or None solutions
 - Empty candidates: No solution
 - Multiple non-distinct candidates: None, One or Multiple solutions
+- (omitted) Candidates is null
 4. Analyse the boundaries
 - Empty candidates array
 - Single candidate
@@ -157,6 +158,7 @@ No bugs found with the 8 specification tests. To raise the code coverage closer 
 - Odd candidates, odd target: Possible
 - Candidates containing 0
 - Non-distinct candidates
+- (omitted) Candidates is null
 5. Devise test cases
 - Empty candidates | c: [], t: 1 -> o: []
 - Single candidate | c: [1], t: 1 -> o: [[1]]
@@ -171,6 +173,7 @@ No bugs found with the 8 specification tests. To raise the code coverage closer 
 - Non-distinct candidates | c: [1, 1, 2], t: 3 -> o: [[1, 1, 1], [1, 2]]
 - Large numbers | c: [1000, 2000], t: 3000 -> [[1000, 1000, 1000], [1000, 2000]]
 - Smallest candidate | c: [1, 2, 3], t: 1 -> o: [[1]]
+- (omitted) Candidates is null | c: null, t: 1 -> o: (omitted)
 6. Automate the test cases: Done!
 - I found a bug in the for-loop in getResult() [more below]
 - I omitted the tests for negative candidates under the assumption the inputs are always >= 0:
