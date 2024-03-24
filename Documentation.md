@@ -445,7 +445,7 @@ We combine our different partitions while only executing exceptions once in orde
 **6. Automating**
 
 I automated the devised test case from the previous step and found one bug. Specifically, with Test 2 I found a bug where the program breaks when needle is empty and haystack isn't. We can add another if statement that considers that case and returns 0 when needle is empty and haystack isn't because an empty string is at the beginning of every string. The rest of the tests passed, thus reassured me that the program behaves as it should in the devised cases.
-In General, I followed the principle of not changing my inputs a lot, but only change what is necessary such that it matches the corresponding test case. In addition, I tried to reduce the combinations of the partitions as much as possible, while still covering all the cases needed to have assurance that the program works as it should.$
+In General, I followed the principle of not changing my inputs a lot, but only change what is necessary such that it matches the corresponding test case. In addition, I tried to reduce the combinations of the partitions as much as possible, while still covering all the cases needed to have assurance that the program works as it should.
 
 
 **7. Augment Test Suite**
